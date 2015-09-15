@@ -11,10 +11,13 @@ Build dependencies:
     - asciidoc (only when building from git, not when building from tarball)
     - a posix system with _POSIX_TIMERS and _POSIX_MONOTONIC_CLOCK or a system
       with a current mach kernel
-Runtime dependencies:
+Run-time dependencies:
     - bash (if you use the default autostart file)
     - glib >= 2.14
     - libx11
+
+Optional build dependencies:
+    - CMake can be used for building instead of the plain Makefile
 
 Optional run-time dependencies:
     - xsetroot (to set wallpaper color in default autostart)
@@ -40,6 +43,7 @@ software, then contact your system administrator.
 You only need to install it manually if you do not like package managers or if
 you are creating a package for your distribution.
 
+The following instructions are for building without CMake. For CMake see below.
 The compilation and installation is configured by the following make-variables
 in config.mk:
 
@@ -54,6 +58,19 @@ DESTDIR=./path/to/fakeroot if you are building a package.
     sudo make DESTDIR=./build/ install
     mkdir -p ~/.config/herbstluftwm/
     cp /etc/xdg/herbstluftwm/autostart ~/.config/herbstluftwm/autostart
+
+If you decide to build with CMake, first run it:
+
+    mkdir -p build && cd build && cmake ..
+
+Afterwards, you may use cmake/ccmake to fine-tune variables, e.g. DESTDIR.
+For building, just run (working directory is build/):
+
+    make
+    
+For installation, run:
+
+    make install
 
 ==== First steps without installing ====
 1. compile it:
